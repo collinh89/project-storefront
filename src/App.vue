@@ -1,23 +1,20 @@
 <template>
-  <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+	<top-bar></top-bar>
+	<v-app>
+		<router-view class="full-height"></router-view>
+	</v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
-  name: 'App',
+import TopBar from "./components/Navigation/TopBar.vue";
 
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
+export default defineComponent({
+	name: "App",
+	components: { TopBar },
+	setup() {
+		return {};
+	},
+});
 </script>
