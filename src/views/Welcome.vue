@@ -11,7 +11,7 @@
 			</v-col>
 
 			<v-col class="mb-4">
-				<h1 class="display-2 font-weight-bold mb-3">Home Page</h1>
+				<h1 class="display-2 font-weight-bold mb-3">Welcome Page</h1>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -22,7 +22,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
 	// eslint-disable-next-line vue/multi-word-component-names
-	name: "Home",
+	name: "Welcome",
 	props: [],
 	components: {},
 	setup() {
@@ -41,5 +41,3 @@ export default defineComponent({
 	},
 });
 </script>
-
-<style scoped></style>

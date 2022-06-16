@@ -1,43 +1,41 @@
 <template>
 	<div>
-		<v-toolbar
-			dark
-			prominent
-			src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-		>
-			<v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-			<v-toolbar-title>Vuetify</v-toolbar-title>
+		<v-toolbar dark>
+			<v-toolbar-title>Project StoreFront</v-toolbar-title>
 
 			<v-spacer></v-spacer>
-
-			<v-btn icon>
-				<v-icon>mdi-export</v-icon>
-			</v-btn>
+			<v-avatar v-if="isAuthenticated">
+				<v-img :src="user.picture" :alt="user.name"></v-img>
+			</v-avatar>
+			<v-btn v-if="!isAuthenticated" @click="login"> Login</v-btn>
+			<v-btn v-if="isAuthenticated" @click="logout"> Logout</v-btn>
 		</v-toolbar>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 export default defineComponent({
 	name: "TopBar",
-	props: ["user"],
 	components: {},
 	setup() {
-		// const message = useMessage();
+		const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+		// const picture = user.value.picture;
 
-		// watch(
-		//   () => isLoggedIn.value,
-		//   () => {
-		//     if (isLoggedIn.value) {
-		//       showLogin.value = false;
-		//     }
-		//   }
-		// );
-
-		return {};
+		return {
+			login: () => {
+				loginWithRedirect();
+			},
+			logout: () => {
+				logout({ returnTo: "http://localhost:8080/welcome" });
+			},
+			isAuthenticated,
+			// eslint-disable-next-line vue/no-dupe-keys
+			user,
+			// picture,
+		};
 	},
 });
 </script>
