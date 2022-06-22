@@ -1,26 +1,32 @@
 <template>
-	<div>
-		<v-toolbar dark>
-			<v-toolbar-title>Project StoreFront</v-toolbar-title>
-
+	<v-toolbar class="top-bar">
+		<v-row class="top-bar-row" align="center">
+			<v-col cols="3">
+				<v-img
+					class="site-logo"
+					:src="require('../../assets/PSWordLogo.png')"
+				/>
+			</v-col>
 			<v-spacer></v-spacer>
-			<v-avatar v-if="isAuthenticated">
-				<v-img :src="user.picture" :alt="user.name"></v-img>
-			</v-avatar>
-			<v-btn v-if="!isAuthenticated" @click="login"> Login</v-btn>
-			<v-btn v-if="isAuthenticated" @click="logout"> Logout</v-btn>
-		</v-toolbar>
-	</div>
+			<v-col class="profile-col" cols="3">
+				<v-row justify="end">
+					<profile></profile>
+				</v-row>
+			</v-col>
+		</v-row>
+	</v-toolbar>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
+import Profile from "./Profile.vue";
 
 export default defineComponent({
 	name: "TopBar",
-	components: {},
+	components: { Profile },
 	setup() {
+		Profile;
 		const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 		// const picture = user.value.picture;
 
@@ -40,4 +46,23 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.site-logo {
+	margin-left: -25px;
+	min-width: 350px;
+	max-width: 350px;
+	min-height: 80px;
+	max-height: 80px;
+}
+.top-bar {
+	min-height: 80px;
+	max-height: 80px;
+}
+.top-bar-row {
+	min-height: 80px;
+	max-height: 80px;
+}
+.profile-col {
+	justify-content: right;
+}
+</style>
