@@ -1,13 +1,13 @@
 <template>
 	<v-menu location="bottom">
 		<template v-slot:activator="{ props }">
-			<v-btn v-if="isAuthenticated" flat ripple="false" icon v-bind="props">
+			<v-btn v-if="isAuthenticated" flat icon v-bind="props">
 				<v-avatar>
 					<v-img class="profile-button" :src="user.picture" :alt="user.name">
 					</v-img>
 				</v-avatar>
 			</v-btn>
-			<v-btn v-if="!isAuthenticated" flat ripple="false" icon v-bind="props">
+			<v-btn v-if="!isAuthenticated" flat icon v-bind="props">
 				<v-icon>mdi-login</v-icon>
 			</v-btn>
 		</template>

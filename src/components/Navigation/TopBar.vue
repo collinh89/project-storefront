@@ -7,7 +7,9 @@
 					:src="require('../../assets/PSWordLogo.png')"
 				/>
 			</v-col>
-			<v-spacer></v-spacer>
+			<v-col>
+				<v-btn @click="toItemForm()">New Item</v-btn>
+			</v-col>
 			<v-col class="profile-col" cols="3">
 				<v-row justify="end">
 					<profile></profile>
@@ -21,6 +23,7 @@
 import { defineComponent } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Profile from "./Profile.vue";
+import router from "@/router";
 
 export default defineComponent({
 	name: "TopBar",
@@ -30,6 +33,9 @@ export default defineComponent({
 		const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 		// const picture = user.value.picture;
 
+		function toItemForm() {
+			router.push("/new-item");
+		}
 		return {
 			login: () => {
 				loginWithRedirect();
@@ -38,9 +44,8 @@ export default defineComponent({
 				logout({ returnTo: "http://localhost:8080/welcome" });
 			},
 			isAuthenticated,
-			// eslint-disable-next-line vue/no-dupe-keys
 			user,
-			// picture,
+			toItemForm,
 		};
 	},
 });

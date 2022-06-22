@@ -11,6 +11,11 @@ const routes: RouteRecordRaw[] = [
 		name: "Welcome",
 		component: () => import("@/views/Welcome.vue"),
 	},
+	{
+		path: "/new-item",
+		name: "ItemForm",
+		component: () => import("@/components/Forms/ItemForm.vue"),
+	},
 ];
 
 const router = createRouter({
