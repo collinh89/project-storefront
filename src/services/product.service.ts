@@ -8,34 +8,23 @@ import { v4 as uuidv4 } from "uuid";
 
 export const ProductService = {
 	async createProduct(product: Product) {
-		await uploadToS3(product.productPic[0]);
-
-		// const formData = new FormData();
-
-		// formData.append("product_name", product.productName);
-		// formData.append("product_desc", product.productDesc);
-		// formData.append("product_price", product.productPrice);
-		// formData.append("product_pic", product.productPic);
-		// const prodObject = {
-		// 	product_name: product.productName,
-		// 	product_desc: product.productDesc,
-		// 	product_price: product.productPrice,
-		// 	product_pic: product.productPic,
-		// };
-
-		// const productJSON = JSON.stringify(prodObject);
-		// console.log(formData);
+		const s3Result: any = await uploadToS3(product.productPic[0]);
+		product.pictureKey = s3Result.Key;
 		axios
 			.post(
 				"http://localhost:8081/product",
-				{},
+				{
+					product_name: product.productName,
+					product_desc: product.productDesc,
+					product_price: product.productPrice,
+					product_pic_key: product.pictureKey,
+				},
 				{
 					headers: {
 						"Content-Type": "application/json",
 					},
 				}
 			)
-
 			.then((resp) => {
 				console.log(resp.data);
 			})
@@ -45,6 +34,7 @@ export const ProductService = {
 			});
 	},
 };
+
 function uploadToS3(productPic: any) {
 	const s3 = new aws.S3({
 		region: "us-east-2",
@@ -52,11 +42,6 @@ function uploadToS3(productPic: any) {
 		secretAccessKey: process.env.VUE_APP_S3_SECRET_KEY,
 		signatureVersion: "v4",
 	});
-
-	console.log(
-		process.env.VUE_APP_S3_ACCESS_KEY,
-		process.env.VUE_APP_S3_SECRET_KEY
-	);
 
 	const imageName = uuidv4();
 

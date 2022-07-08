@@ -3,4 +3,5 @@ export interface Product {
 	productDesc: string;
 	productPrice: number;
 	productPic: any;
+	pictureKey?: string;
 }
