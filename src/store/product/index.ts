@@ -4,6 +4,7 @@ import { Module } from "vuex";
 import { State } from "@/store";
 import { Product } from "@/types/products/product-types";
 import { ProductService } from "@/services/product.service";
+import { ref } from "vue";
 // import { Player } from "@/types";
 
 export type ProductState = {
@@ -27,10 +28,16 @@ export const productModule: Module<ProductState, State> = {
 	namespaced: true,
 	state: {},
 	actions: {
-		async createProduct({ commit }, product: Product) {
+		async createProduct({ commit }, { name, desc, price, pic }) {
 			try {
 				// commit("setLoading", true);
-				const data = await ProductService.createProduct(product);
+				const product = ref<Product>({
+					productName: name,
+					productDesc: desc,
+					productPrice: price,
+					productPic: pic,
+				});
+				const data = await ProductService.createProduct(product.value);
 				// commit("setLoading", false);
 			} catch (error) {
 				// commit("setLoading", false);

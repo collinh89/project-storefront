@@ -20,7 +20,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { Product } from "@/types/products/product-types";
 import { store } from "../../store";
 import { ProductActions } from "@/store/product";
 
@@ -33,9 +32,7 @@ export default defineComponent({
 		const productName = ref<string>("");
 		const productDesc = ref<string>("");
 		const productPrice = ref<number>(0);
-		const productPic = ref<any[]>([]);
-
-		const product = ref<Product>();
+		const productPic = ref<Blob>();
 
 		// const player = computed(() => store.getters[PlayerGetters.PLAYER]);
 
@@ -45,14 +42,11 @@ export default defineComponent({
 		// });
 
 		async function submit() {
-			product.value = {
-				productName: productName.value,
-				productDesc: productDesc.value,
-				productPrice: productPrice.value,
-				productPic: productPic.value,
-			};
 			await store.dispatch(ProductActions.CREATE_PRODUCT, {
-				product: product.value,
+				name: productName,
+				desc: productDesc,
+				price: productPrice,
+				pic: productPic,
 			});
 		}
 		// watch(
