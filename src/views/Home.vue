@@ -1,41 +1,20 @@
 <template>
-	<v-container>
-		<v-row class="text-center">
-			<v-col cols="12">
-				<v-img
-					:src="require('../assets/logo.svg')"
-					class="my-3"
-					contain
-					height="200"
-				/>
-			</v-col>
-
-			<v-col class="mb-4">
-				<h1 class="display-2 font-weight-bold mb-3">Home Page</h1>
-			</v-col>
-		</v-row>
-	</v-container>
+	<product-card></product-card>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
+import ProductCard from "@/components/Card/ProductCard.vue";
 
 export default defineComponent({
 	// eslint-disable-next-line vue/multi-word-component-names
 	name: "Home",
 	props: [],
-	components: {},
+	components: { ProductCard },
 	setup() {
-		// const message = useMessage();
-
-		// watch(
-		//   () => isLoggedIn.value,
-		//   () => {
-		//     if (isLoggedIn.value) {
-		//       showLogin.value = false;
-		//     }
-		//   }
-		// );
+		onMounted(async () => {
+			console.log("here");
+		});
 
 		return {};
 	},

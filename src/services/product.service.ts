@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 export const ProductService = {
 	async createProduct(product: Product) {
 		const s3Result: any = await uploadToS3(product.productPic[0]);
-		product.pictureKey = s3Result.Key;
+		product.pictureKey = s3Result.Location;
 		axios
 			.post(
 				"http://localhost:8081/product",
@@ -25,13 +25,18 @@ export const ProductService = {
 					},
 				}
 			)
-			.then((resp) => {
-				console.log(resp.data);
-			})
+			// .then((resp) => {
+			// 	console.log(resp.data);
+			// })
 			.catch((err) => {
 				// Handle Error Here
 				console.error(err);
 			});
+	},
+	async getProducts() {
+		const res = await axios.get("http://localhost:8081/product/getAll");
+
+		return res.data;
 	},
 };
 
@@ -54,7 +59,6 @@ function uploadToS3(productPic: any) {
 
 	return new Promise((resolve, reject) => {
 		s3.upload(params, function (err: any, data: any) {
-			console.log(data);
 			if (err) {
 				return reject(err);
 			}
@@ -63,3 +67,29 @@ function uploadToS3(productPic: any) {
 		});
 	});
 }
+
+// function getFromS3(key: string) {
+// 	const s3 = new aws.S3({
+// 		region: "us-east-2",
+// 		accessKeyId: process.env.VUE_APP_S3_ACCESS_KEY,
+// 		secretAccessKey: process.env.VUE_APP_S3_SECRET_KEY,
+// 		signatureVersion: "v4",
+// 	});
+
+// 	const params = {
+// 		Bucket: "product-pics",
+// 		Key: key,
+// 		// Expires: 60,
+// 	};
+
+// 	return new Promise((resolve, reject) => {
+// 		s3.getObject(params, function (err: any, data: any) {
+// 			console.log(data);
+// 			if (err) {
+// 				return reject(err);
+// 			}
+
+// 			return resolve(data);
+// 		});
+// 	});
+// }
