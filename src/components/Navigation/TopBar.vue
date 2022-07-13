@@ -12,7 +12,7 @@
 			</v-col>
 			<v-col class="profile-col" cols="3">
 				<v-row justify="end">
-					<profile></profile>
+					<!-- <profile></profile> -->
 				</v-row>
 			</v-col>
 		</v-row>
@@ -22,14 +22,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import Profile from "./Profile.vue";
+// import Profile from "./Profile.vue";
 import router from "@/router";
 
 export default defineComponent({
 	name: "TopBar",
-	components: { Profile },
+	components: {
+		// Profile
+	},
 	setup() {
-		Profile;
 		const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 		// const picture = user.value.picture;
 
