@@ -20,6 +20,7 @@
 		"dotenv": "^16.0.1",
 		"form-data": "^4.0.0",
 		"roboto-fontface": "*",
+		"util": "^0.12.4",
 		"uuid": "^8.3.2",
 		"vue": "^3.2.13",
 		"vue-class-component": "^8.0.0-0",
@@ -45,6 +46,11 @@
 		"typescript": "~4.5.5",
 		"vue-cli-plugin-vuetify": "~2.5.1",
 		"webpack-plugin-vuetify": "^2.0.0-alpha.0"
+	},
+	"resolve": {
+		"fallback": {
+			"util": "require.resolve('util/')"
+		}
 	},
 	"eslintConfig": {
 		"root": true,
