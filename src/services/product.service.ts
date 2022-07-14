@@ -12,7 +12,7 @@ export const ProductService = {
 		product.pictureKey = s3Result.Location;
 		axios
 			.post(
-				process.env.PORT || "http://localhost:8081/product",
+				process.env.VUE_APP_PORT || "http://localhost:8081/product",
 				{
 					product_name: product.productName,
 					product_desc: product.productDesc,
@@ -35,7 +35,8 @@ export const ProductService = {
 	},
 	async getProducts() {
 		const res = await axios.get(
-			"product/getAll" || "http://localhost:8081/product/getAll"
+			process.env.VUE_APP_PORT + "product/getAll" ||
+				"http://localhost:8081/product/getAll"
 		);
 
 		return res.data;
