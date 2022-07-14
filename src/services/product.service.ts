@@ -35,7 +35,7 @@ export const ProductService = {
 	},
 	async getProducts() {
 		const res = await axios.get(
-			process.env.PORT + "/product/getAll" ||
+			process.env.PORT + "product/getAll" ||
 				"http://localhost:8081/product/getAll"
 		);
 
