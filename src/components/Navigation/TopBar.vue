@@ -1,11 +1,10 @@
 <template>
-	<v-toolbar class="top-bar">
-		<v-row class="top-bar-row" align="center">
+	<v-toolbar>
+		<v-row align="center">
 			<v-col cols="3">
-				<v-img
-					class="site-logo"
-					:src="require('../../assets/PSWordLogo.png')"
-				/>
+				<button class="home-btn" v-on:click="toHome()">
+					<v-img :src="require('../../assets/PSWordLogo.png')" />
+				</button>
 			</v-col>
 			<v-col>
 				<v-btn @click="toItemForm()">New Item</v-btn>
@@ -37,6 +36,9 @@ export default defineComponent({
 		function toItemForm() {
 			router.push("/new-item");
 		}
+		function toHome() {
+			router.push("/");
+		}
 		return {
 			login: () => {
 				loginWithRedirect();
@@ -47,28 +49,15 @@ export default defineComponent({
 			isAuthenticated,
 			user,
 			toItemForm,
+			toHome,
 		};
 	},
 });
 </script>
 
 <style scoped>
-.site-logo {
-	margin-left: -25px;
-	min-width: 350px;
-	max-width: 350px;
-	min-height: 80px;
-	max-height: 80px;
-}
-.top-bar {
-	min-height: 80px;
-	max-height: 80px;
-}
-.top-bar-row {
-	min-height: 80px;
-	max-height: 80px;
-}
-.profile-col {
-	justify-content: right;
+.home-btn {
+	height: 100%;
+	width: 100%;
 }
 </style>
